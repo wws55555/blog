@@ -69,6 +69,7 @@ class ArticleControllerTest {
         assertThat(articles.get(0).getTitle()).isEqualTo(title);
     }
 
+    // get으로 가져온것들은 andExpect로 연이어 확인을 한다. get이 아닌 경우는 repository에서 꺼내온 뒤 확인
     @Test
     void requestReadAll() throws Exception{
         //given
@@ -130,5 +131,33 @@ class ArticleControllerTest {
         result.andExpect(status().isOk());
         List<Article> articles = articleRepository.findAll();
         assertThat(articles).isEmpty();
+    }
+
+    @Test
+    void updateArticle() throws Exception {
+        //given
+        String url = "/v0/article/{id}";
+        String title = "제목";
+        String content = "내용";
+        Article savedArticle = articleRepository.save(Article.builder()
+                .title(title)
+                .content(content)
+                .build());
+
+        String updatedTitle = "수정된 제목";
+        String updatedContent = "수정된 내용";
+        UpdateRequest updateRequest = new UpdateRequest(updatedTitle, updatedContent);
+        String request = objectMapper.writeValueAsString(updateRequest);
+
+        //when
+        ResultActions result = mockMvc.perform(put(url, savedArticle.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(request));
+
+        //then
+        result.andExpect(status().isOk());
+        Article findArticle = articleRepository.findById(savedArticle.getId()).get();
+        assertThat(findArticle.getTitle()).isEqualTo(updatedTitle);
+        assertThat(findArticle.getContent()).isEqualTo(updatedContent);
     }
 }

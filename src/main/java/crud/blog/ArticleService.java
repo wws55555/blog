@@ -30,10 +30,13 @@ public class ArticleService {
     public void delete(Long id) {
         articleRepository.deleteById(id);
     }
-    //
-//    public void updateArticle(Article article, String title, String content) {
-//        article.setTitle(title);
-//        article.setContent(content);
-//    }
-//
+
+    // update 함수는 entity쪽에서 함수를 만들어놓는다
+    @Transactional
+    public Article update(Long id, String title, String content) {
+        Article article = articleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+        article.update(title, content);
+        return article;
+    }
 }
