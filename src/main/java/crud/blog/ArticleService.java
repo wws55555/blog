@@ -17,12 +17,13 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
-//    public Optional<Article> readOne(Long id) {
-//        return articleRepository.findById(id);
-//    }
-
     public List<Article> readAll() {
         return articleRepository.findAll();
+    }
+
+    public Article readOne(Long id) {
+        return articleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
     }
 //
 //    public void updateArticle(Article article, String title, String content) {

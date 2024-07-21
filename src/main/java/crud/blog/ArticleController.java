@@ -33,14 +33,10 @@ public class ArticleController {
                 .body(articles);
     }
 
-//    @GetMapping("/article")
-//    public ResponseEntity<Article> requestReadArticle(@RequestBody ReadRequest request) {
-//        Optional<Article> article = articleService.readOne(request.getId());
-//        if (article.isPresent()) {
-//            return ResponseEntity.status(HttpStatus.OK)
-//                    .body(article.get());
-//        } else {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST);
-//        }
-//    }
+    @GetMapping("/article/{id}")
+    public ResponseEntity<ArticleResponse> requestReadOne(@PathVariable Long id) {
+        Article article = articleService.readOne(id);
+        return ResponseEntity.ok()
+                .body(new ArticleResponse(article));
+    }
 }

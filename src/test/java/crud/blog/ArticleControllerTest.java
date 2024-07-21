@@ -76,7 +76,7 @@ class ArticleControllerTest {
         String url = "/v0/article";
         String title = "제목";
         String content = "내용";
-        Article savedArticle = articleRepository.save(Article.builder()
+        articleRepository.save(Article.builder()
                 .title(title)
                 .content(content)
                 .build());
@@ -90,5 +90,26 @@ class ArticleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].content").value(content))
                 .andExpect(jsonPath("$[0].title").value(title));
+    }
+
+    @Test
+    void readOne() throws Exception {
+        //given
+        String url = "/v0/article/{id}";
+        String title = "제목";
+        String content = "내용";
+        Article savedArticle = articleRepository.save(Article.builder()
+                .title(title)
+                .content(content)
+                .build());
+
+        //when
+        ResultActions result = mockMvc.perform(get(url, savedArticle.getId()));
+
+        // then
+        result
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value(content))
+                .andExpect(jsonPath("$.title").value(title));
     }
 }
