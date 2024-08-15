@@ -1,25 +1,23 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: run pwd
-        run: pwd
-      - name: run ls -al
-        run: ls -al
-#      - uses: action/checkout@v3
+      - uses: actions/checkout@v3
 
-#      - uses: action/setup-java@v3
-#        with:
-#          distribution: 'zulu'
-#          java-version: '17'
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '17'
 
-#      - name: Grant execute permission for gradlew
-#        run: chmod +x gradlew
-#
-#      - name: Build with Gradle
-#        run: ./gradlew clean build
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
