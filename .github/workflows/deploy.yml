@@ -22,24 +22,24 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: Get current time
-        uses: josStorer/get-current-time@v2.0.2
-        id: current-time
-        with:
-          format: YYYY-MM-DDTHH-mm-ss
-          utcOffset: "+09:00"
-
-      - name: Set artifact
-        run: echo "artifact=$(ls ./build/libs)" >> $GITHUB_ENV
-
-      - name: Upload build to EC2
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ vars.EC2_HOST }}
-          username: ${{ vars.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          target: /home/ec2-user/
-          source: ./build/libs/${{env.artifact}}
+#      - name: Get current time
+#        uses: josStorer/get-current-time@v2.0.2
+#        id: current-time
+#        with:
+#          format: YYYY-MM-DDTHH-mm-ss
+#          utcOffset: "+09:00"
+#
+#      - name: Set artifact
+#        run: echo "artifact=$(ls ./build/libs)" >> $GITHUB_ENV
+#
+#      - name: Upload build to EC2
+#        uses: appleboy/scp-action@v0.1.4
+#        with:
+#          host: ${{ vars.EC2_HOST }}
+#          username: ${{ vars.EC2_USER }}
+#          key: ${{ secrets.EC2_SSH_KEY }}
+#          target: /home/ec2-user/
+#          source: ./build/libs/${{env.artifact}}
 
 #      - name: Deploy on EC2
 #        uses: appleboy/ssh-action@v0.1.10
