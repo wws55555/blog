@@ -38,9 +38,9 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key_path: /Users/wws55555/.ssh/id_rsa
+          key: ${{ secrets.EC2_SSH_KEY }}
           target: /home/ec2-user/
-          source: ./build/libs/blog-0.0.1-SNAPSHOT.jar
+          source: ${{ env.artifact }}
 
 #      - name: Deploy on EC2
 #        uses: appleboy/ssh-action@v0.1.10
