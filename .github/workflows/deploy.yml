@@ -31,7 +31,7 @@ jobs:
 
       - name: Set artifact
 #        run: echo "artifact=$(ls ./build/libs)" >> $GITHUB_ENV
-        run: echo "artifact=$(ls -t ./build/libs/*.jar | head -n 1)" >> $GITHUB_ENV
+        run: echo "artifact=$(ls -t ./build/libs/*SNAPSHOT.jar | head -n 1)" >> $GITHUB_ENV
 #
       - name: Upload build to EC2
         uses: appleboy/scp-action@v0.1.4
