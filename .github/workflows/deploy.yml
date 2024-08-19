@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    environment: prod
     steps:
       - uses: actions/checkout@v3
 
@@ -43,7 +43,7 @@ jobs:
           source: ${{ env.artifact }}
 
       - name: Deploy on EC2
-        uses: appleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ vars.HOST }}
           username: ${{ vars.USERNAME }}
