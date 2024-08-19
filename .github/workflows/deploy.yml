@@ -43,7 +43,7 @@ jobs:
           source: ${{ env.artifact }}
 
       - name: Deploy on EC2
-        uses: appleboy/ssh-action@v0.0.7
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ vars.HOST }}
           username: ${{ vars.USERNAME }}
