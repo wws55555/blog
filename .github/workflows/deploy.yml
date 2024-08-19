@@ -42,14 +42,15 @@ jobs:
           target: /home/ec2-user/
           source: ${{ env.artifact }}
 
-#      - name: Deploy on EC2
-#        uses: appleboy/ssh-action@v0.1.10
-#        with:
-#          host: ${{ vars.EC2_HOST }}
-#          username: ${{ vars.EC2_USER }}
-#          key: ${{ secrets.EC2_SSH_KEY }}
-#          script: |
-#            cd /home/ec2-user/
-#            sudo systemctl stop my-app.service
-#            sudo cp ${env.artifact} /opt/myapp/my-app.jar
-#            sudo systemctl start my-app.service
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.HOST }}
+          username: ${{ vars.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd /home/ec2-user/
+            sudo systemctl stop my-app.service
+            sudo cp ${env.artifact} /opt/myapp/my-app.jar
+            sudo systemctl start my-app.service
