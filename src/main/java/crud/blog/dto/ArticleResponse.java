@@ -1,14 +1,14 @@
-package crud.blog.api.v0;
+package crud.blog.dto;
 
-import crud.blog.dao.Article;
+import crud.blog.domain.Article;
 import lombok.Data;
 
 @Data
-public class ArticleResponseV0 {
+public class ArticleResponse {
     String title;
     String content;
 
-    public ArticleResponseV0(Article article) {
+    public ArticleResponse(Article article) {
         this.title = article.getTitle();
         this.content = article.getContent();
     }

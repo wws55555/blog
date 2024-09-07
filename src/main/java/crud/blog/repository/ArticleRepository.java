@@ -1,5 +1,6 @@
-package crud.blog.dao;
+package crud.blog.repository;
 
+import crud.blog.domain.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

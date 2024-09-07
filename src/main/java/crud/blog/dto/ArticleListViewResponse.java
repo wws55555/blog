@@ -1,15 +1,15 @@
-package crud.blog.api.v1;
+package crud.blog.dto;
 
-import crud.blog.dao.Article;
+import crud.blog.domain.Article;
 import lombok.Data;
 
 @Data
-public class ArticleListViewResponseV1 {
+public class ArticleListViewResponse {
     Long id;
     String title;
     String content;
 
-    public ArticleListViewResponseV1(Article article) {
+    public ArticleListViewResponse(Article article) {
         this.id = article.getId();
         this.title = article.getTitle();
         this.content = article.getContent();

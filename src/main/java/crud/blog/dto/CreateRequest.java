@@ -1,6 +1,6 @@
-package crud.blog.api.v0;
+package crud.blog.dto;
 
-import crud.blog.dao.Article;
+import crud.blog.domain.Article;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateRequestV0 {
+public class CreateRequest {
 
     String title;
     String content;

@@ -1,10 +1,10 @@
 package crud.blog;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import crud.blog.api.v0.CreateRequestV0;
-import crud.blog.api.v0.UpdateRequestV0;
-import crud.blog.dao.Article;
-import crud.blog.dao.ArticleRepository;
+import crud.blog.dto.CreateRequest;
+import crud.blog.dto.UpdateRequest;
+import crud.blog.domain.Article;
+import crud.blog.repository.ArticleRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ArticleControllerV0Test {
+class ArticleApiControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -62,8 +62,8 @@ class ArticleControllerV0Test {
         String url = "/v0/article";
         String title = "제목";
         String content = "내용";
-        CreateRequestV0 createRequestV0 = new CreateRequestV0(title, content);
-        String requestBody = objectMapper.writeValueAsString(createRequestV0);
+        CreateRequest createRequest = new CreateRequest(title, content);
+        String requestBody = objectMapper.writeValueAsString(createRequest);
 
         //when
         ResultActions result = mockMvc.perform(post(url)
@@ -154,8 +154,8 @@ class ArticleControllerV0Test {
 
         String updatedTitle = "수정된 제목";
         String updatedContent = "수정된 내용";
-        UpdateRequestV0 updateRequestV0 = new UpdateRequestV0(updatedTitle, updatedContent);
-        String request = objectMapper.writeValueAsString(updateRequestV0);
+        UpdateRequest updateRequest = new UpdateRequest(updatedTitle, updatedContent);
+        String request = objectMapper.writeValueAsString(updateRequest);
 
         //when
         ResultActions result = mockMvc.perform(put(url, savedArticle.getId())

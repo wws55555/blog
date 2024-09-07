@@ -1,7 +1,9 @@
-package crud.blog.api.v1;
+package crud.blog.controller;
 
-import crud.blog.dao.Article;
-import crud.blog.dao.ArticleService;
+import crud.blog.dto.ArticleListViewResponse;
+import crud.blog.dto.ArticleViewResponse;
+import crud.blog.domain.Article;
+import crud.blog.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +14,13 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class ArticleControllerV1 {
+public class ArticleViewController {
     private final ArticleService articleService;
 
     @GetMapping("/articles")
     public String getArticles(Model model) {
-        List<ArticleListViewResponseV1> articles = articleService.readAll().stream()
-                .map(ArticleListViewResponseV1::new)
+        List<ArticleListViewResponse> articles = articleService.readAll().stream()
+                .map(ArticleListViewResponse::new)
                 .toList();
         model.addAttribute("articles", articles);
         return "articleList";
@@ -27,7 +29,7 @@ public class ArticleControllerV1 {
     @GetMapping("/articles/{id}")
     public String getArticle(@PathVariable Long id, Model model) {
         Article article = articleService.readOne(id);
-        model.addAttribute("article", new ArticleViewResponseV1(article));
+        model.addAttribute("article", new ArticleViewResponse(article));
         return "article";
     }
 }

@@ -1,5 +1,7 @@
-package crud.blog.dao;
+package crud.blog.service;
 
+import crud.blog.domain.Article;
+import crud.blog.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

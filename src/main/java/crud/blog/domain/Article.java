@@ -1,4 +1,4 @@
-package crud.blog.dao;
+package crud.blog.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

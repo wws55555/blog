@@ -1,18 +1,18 @@
-package crud.blog.api.v1;
+package crud.blog.dto;
 
-import crud.blog.dao.Article;
+import crud.blog.domain.Article;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class ArticleViewResponseV1 {
+public class ArticleViewResponse {
     Long id;
     String title;
     String content;
     LocalDateTime createdAt;
 
-    public ArticleViewResponseV1(Article article) {
+    public ArticleViewResponse(Article article) {
         this.id = article.getId();
         this.title = article.getTitle();
         this.content = article.getContent();
